@@ -6,6 +6,7 @@ Created on Tue Mar 28 15:15:46 2023
 """
 
 from binarytree import BinaryTree
+from collections import deque
 
 class LinkedBinaryTree(BinaryTree):
     """Linked representation of a binary tree structure."""
@@ -192,5 +193,58 @@ class LinkedBinaryTree(BinaryTree):
             node._right = t2.root
             t2._root = None
             t2._size = 0
+
+    def preorder(self):
+        """Generate a preorder iteration of positions in the tree."""
+        if self._root is not None:
+            yield from self._subtree_preorder(self._root)
+
+    def _subtree_preorder(self, p):
+        """Generate a preorder iteration of positions in subtree rooted at p."""
+        yield p
+        if p._left is not None:
+            yield from self._subtree_preorder(p._left)
+        if p._right is not None:
+            yield from self._subtree_preorder(p._right)
+
+    def postorder(self):
+        """Generate a postorder iteration of positions in the tree."""
+        if self._root is not None:
+            yield from self._subtree_postorder(self._root)
+
+    def _subtree_postorder(self, p):
+        """Generate a postorder iteration of positions in subtree rooted at p."""
+        if p._left is not None:
+            yield from self._subtree_postorder(p._left)
+        if p._right is not None:
+            yield from self._subtree_postorder(p._right)
+        yield p
+
+    def inorder(self):
+        """Generate an inorder iteration of positions in the tree."""
+        if self._root is not None:
+            yield from self._subtree_inorder(self._root)
+
+    def _subtree_inorder(self, p):
+        """Generate an inorder iteration of positions in subtree rooted at p."""
+        if p._left is not None:
+            yield from self._subtree_inorder(p._left)
+        yield p
+        if p._right is not None:
+            yield from self._subtree_inorder(p._right)
+
+    def breadthfirst(self):
+        """Generate a breadth-first iteration of positions in the tree."""
+        if self._root is not None:
+            fringe = deque()
+            fringe.append(self._root)
+            while len(fringe) > 0:
+                p = fringe.popleft()
+                yield p
+                if p._left is not None:
+                    fringe.append(p._left)
+                if p._right is not None:
+                    fringe.append(p._right)
+
             
 
