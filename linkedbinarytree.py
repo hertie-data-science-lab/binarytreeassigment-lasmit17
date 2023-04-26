@@ -195,12 +195,11 @@ class LinkedBinaryTree(BinaryTree):
             t2._size = 0
 
     def preorder(self):
-        """Generate a preorder iteration of positions in the tree."""
+        """A method to preorder traverse the binary tree"""
         if self._root is not None:
             yield from self._subtree_preorder(self._root)
 
     def _subtree_preorder(self, p):
-        """Generate a preorder iteration of positions in subtree rooted at p."""
         yield p
         if p._left is not None:
             yield from self._subtree_preorder(p._left)
@@ -208,12 +207,11 @@ class LinkedBinaryTree(BinaryTree):
             yield from self._subtree_preorder(p._right)
 
     def postorder(self):
-        """Generate a postorder iteration of positions in the tree."""
+        """A method to postorder traverse the binary tree"""
         if self._root is not None:
             yield from self._subtree_postorder(self._root)
 
     def _subtree_postorder(self, p):
-        """Generate a postorder iteration of positions in subtree rooted at p."""
         if p._left is not None:
             yield from self._subtree_postorder(p._left)
         if p._right is not None:
@@ -221,7 +219,7 @@ class LinkedBinaryTree(BinaryTree):
         yield p
 
     def inorder(self):
-        """Generate an inorder iteration of positions in the tree."""
+        """A method to inorder traverse the tree"""
         if self._root is not None:
             yield from self._subtree_inorder(self._root)
 
